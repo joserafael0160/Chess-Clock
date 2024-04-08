@@ -1,7 +1,7 @@
 :root {
   --color-win: #4e4;
   --color-lose: #f22;
-  --color-stop: #444; 
+  --color-pause: #444; 
   --color-turn: #00aaef;
   --color-icon-stop: invert(30%);
   --color-icon-active: invert(90%);
@@ -52,12 +52,14 @@ img {
   border-radius: 10px; 
   border: none; 
   font-size: 6em; 
-  background-color: var(--color-stop); 
+  background-color: var(--color-pause); 
   font-weight: bold; 
   box-shadow: 2px 3px black; 
   overflow: hidden; 
 }
-
+button {
+  cursor: pointer; 
+}
 @media screen and (width < 795px) {
   .container {
     flex-direction: column; 
