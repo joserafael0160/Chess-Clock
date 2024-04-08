@@ -51,7 +51,7 @@ img {
   flex-grow: 3; 
   border-radius: 10px; 
   border: none; 
-  font-size: 6em; 
+  font-size: 5rem;  
   background-color: var(--color-pause); 
   font-weight: bold; 
   box-shadow: 2px 3px black; 

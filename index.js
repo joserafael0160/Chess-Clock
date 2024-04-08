@@ -49,8 +49,9 @@ if((active === 0) || (active === 1)){
 
 restartBtn.addEventListener("click",()=>{
   player1.style.backgroundColor = "#444";
+  player1.style.cursor = "pointer";
+        
   player2.style.backgroundColor = "#444";
-  player1.style.cursor = "pointer";      
   player2.style.cursor = "pointer";      
 
   active = 0;
