@@ -19,6 +19,8 @@ const settingModal = document.getElementById("settings-dialog")
 const cancelBtn = document.querySelector(".cancel");
 const acceptBtn = document.querySelector(".accept");
 
+const tickAudio = new Audio("resources/tick.mp4")
+const lostAudio = new Audio("resources/lostAudio.mp3")
 let active = 0;
 
 let startMinPlayer1 = player1.innerHTML.split(":").reverse();  
@@ -36,7 +38,8 @@ function updateCountDown() {
     player2.style.backgroundColor = "#4e4"; 
     player1.style.cursor = "pointer";      
     player2.style.cursor = "pointer";      
-    active = 0;
+    active = 3;
+    lostAudio.play();
     return; 
   }
   if(time2 <= 0) {
@@ -46,7 +49,8 @@ function updateCountDown() {
     player2.style.backgroundColor = "#f22"; 
     player1.style.cursor = "pointer";      
     player2.style.cursor = "pointer";    
-    active = 0;
+    active = 3;
+    lostAudio.play(); 
     return;
   }
   if(active === 1){
@@ -93,13 +97,14 @@ if(active === 0 || active == 1){
     player1.tabIndex = "-1"; 
     clearInterval(intervalId);
     intervalId = setInterval(updateCountDown, 1000);
+    tickAudio.play();
     player2.style.backgroundColor = "#00aaef"; 
     player2.style.cursor = "pointer";      
     player2.tabIndex = "1"; 
     if(active === 2){
       player1.style.backgroundColor = "#444";  
     } 
-  })
+  }) 
 }
 
 if(active === 0 || active === 2){
@@ -112,6 +117,7 @@ if(active === 0 || active === 2){
     clearInterval(intervalId); 
     updateCountDown();
     intervalId = setInterval(updateCountDown, 1000);
+    tickAudio.play(); 
     player1.tabIndex = "1";    
     player1.style.backgroundColor = "#00aaef"; 
     player1.style.cursor = "pointer";    
