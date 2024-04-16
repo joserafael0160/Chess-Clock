@@ -36,8 +36,8 @@ function updateCountDown() {
     player1.innerHTML = "**You Lost**"
     player1.style.backgroundColor = "#f22";
     player2.style.backgroundColor = "#4e4"; 
-    player1.style.cursor = "pointer";      
-    player2.style.cursor = "pointer";      
+    player1.style.cursor = "default";      
+    player2.style.cursor = "default";      
     active = 3;
     lostAudio.play();
     return; 
@@ -47,8 +47,8 @@ function updateCountDown() {
     player2.innerHTML = "**You Lost**"
     player1.style.backgroundColor = "#4e4";
     player2.style.backgroundColor = "#f22"; 
-    player1.style.cursor = "pointer";      
-    player2.style.cursor = "pointer";    
+    player1.style.cursor = "default";      
+    player2.style.cursor = "default";     
     active = 3;
     lostAudio.play(); 
     return;
@@ -89,34 +89,34 @@ function addingTime() {
   }
 }
 
-if(active === 0 || active == 1){ 
-  player1.addEventListener("click",()=>{
-    addingTime();  
-    active = 2;   
-    player1.style.cursor = "default"; 
-    player1.tabIndex = "-1"; 
+player1.addEventListener("click",()=>{
+    if(active === 0 || active == 1){ 
+    addingTime();   
     clearInterval(intervalId);
     intervalId = setInterval(updateCountDown, 1000);
     tickAudio.play();
+    active = 2;   
+    player1.style.cursor = "default"; 
+    player1.tabIndex = "-1"; 
     player2.style.backgroundColor = "#00aaef"; 
     player2.style.cursor = "pointer";      
     player2.tabIndex = "1"; 
     if(active === 2){
       player1.style.backgroundColor = "#444";  
     } 
-  }) 
-}
+  }
+}) 
 
-if(active === 0 || active === 2){
+
   player2.addEventListener("click",()=>{
+    if(active === 0 || active === 2){
     addingTime();
-    active = 1;   
+    clearInterval(intervalId);
+    intervalId = setInterval(updateCountDown, 1000);
+    active = 1;    
     player2.style.cursor = "default";     
     player2.tabIndex = "-1";  
 
-    clearInterval(intervalId); 
-    updateCountDown();
-    intervalId = setInterval(updateCountDown, 1000);
     tickAudio.play(); 
     player1.tabIndex = "1";    
     player1.style.backgroundColor = "#00aaef"; 
@@ -125,8 +125,8 @@ if(active === 0 || active === 2){
     if(active === 1){ 
       player2.style.backgroundColor = "#444";  
     }
-  }) 
-}
+  }
+}) 
 
 pauseStartBtn.addEventListener("click",()=>{
   clearInterval(intervalId); 
