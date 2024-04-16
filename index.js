@@ -26,33 +26,72 @@ let time1 = parseInt(startMinPlayer1[1]) * 60 + parseInt(startMinPlayer1[0]);
 let intervalId;  
 let startMinPlayer2 = player2.innerHTML.split(":").reverse();   
 let time2 = parseInt(startMinPlayer2[1]) * 60 + parseInt(startMinPlayer2[0]); 
-let additionTime = 5;
+let additionTime = 0;
 
 function updateCountDown() {
+  if(time1 <= 0) {
+    clearInterval(intervalId);
+    player1.innerHTML = "**You Lost**"
+    player1.style.backgroundColor = "#f22";
+    player2.style.backgroundColor = "#4e4"; 
+    player1.style.cursor = "pointer";      
+    player2.style.cursor = "pointer";      
+    active = 0;
+    return; 
+  }
+  if(time2 <= 0) {
+    clearInterval(intervalId);
+    player2.innerHTML = "**You Lost**"
+    player1.style.backgroundColor = "#4e4";
+    player2.style.backgroundColor = "#f22"; 
+    player1.style.cursor = "pointer";      
+    player2.style.cursor = "pointer";    
+    active = 0;
+    return;
+  }
   if(active === 1){
     const minutes = Math.floor(time1 / 60);
     let seconds = time1 % 60;
     seconds = seconds < 10 ? "0" + seconds : seconds;
     player1.innerHTML = `${minutes}:${seconds}`;
     time1--;  
-  } 
+  }  
   if (active === 2){ 
     const minutes = Math.floor(time2 / 60); 
     let seconds = time2 % 60;
     seconds = seconds < 10 ? "0" + seconds : seconds;
     player2.innerHTML = `${minutes}:${seconds}`;
     time2--; 
+  } 
+  
+}
+
+function addingTime() {
+  if(active === 1) {
+    time1 += additionTime;
+    const minutes = Math.floor(time1 / 60);
+    let seconds = time1 % 60;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    player1.innerHTML = `${minutes}:${seconds}`;
+    
+  }
+  if (active === 2){ 
+    time2 += additionTime;
+    const minutes = Math.floor(time2 / 60); 
+    let seconds = time2 % 60;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    player2.innerHTML = `${minutes}:${seconds}`;
+  
   }
 }
 
 if(active === 0 || active == 1){ 
   player1.addEventListener("click",()=>{
-    active = 2; 
+    addingTime();  
+    active = 2;   
     player1.style.cursor = "default"; 
     player1.tabIndex = "-1"; 
     clearInterval(intervalId);
-    
-    updateCountDown() 
     intervalId = setInterval(updateCountDown, 1000);
     player2.style.backgroundColor = "#00aaef"; 
     player2.style.cursor = "pointer";      
@@ -65,6 +104,7 @@ if(active === 0 || active == 1){
 
 if(active === 0 || active === 2){
   player2.addEventListener("click",()=>{
+    addingTime();
     active = 1;   
     player2.style.cursor = "default";     
     player2.tabIndex = "-1";  
@@ -125,7 +165,8 @@ acceptBtn.addEventListener("click",()=>{
   let timeSelected = document.getElementById('timeSelect');
   let addTimeSelect = document.getElementById('add-timeSelect');
   let timeSelect = timeSelected.options[timeSelected.selectedIndex].value;
-  additionTime = addTimeSelect.options[addTimeSelect.selectedIndex].value;
+  console.log(additionTime); 
+  additionTime = parseInt(addTimeSelect.options[addTimeSelect.selectedIndex].value);
   if(timeSelect == 10) { 
     startMinPlayer1 = ["00","10"];
     startMinPlayer2 = ["00","10"];
