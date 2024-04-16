@@ -14,15 +14,19 @@ const pauseStartIco = document.querySelector(".pause-start-btn-img");
 const restartIco = document.querySelector(".restart-btn-img");
 const settingIco = document.querySelector(".setting-btn-img");
 
-
+// Modal
+const settingModal = document.getElementById("settings-dialog")
+const cancelBtn = document.querySelector(".cancel");
+const acceptBtn = document.querySelector(".accept");
 
 let active = 0;
 
-const startMinPlayer1 = player1.innerHTML.split(":").reverse();  
+let startMinPlayer1 = player1.innerHTML.split(":").reverse();  
 let time1 = parseInt(startMinPlayer1[1]) * 60 + parseInt(startMinPlayer1[0]);  
 let intervalId;  
-const startMinPlayer2 = player2.innerHTML.split(":").reverse();   
+let startMinPlayer2 = player2.innerHTML.split(":").reverse();   
 let time2 = parseInt(startMinPlayer2[1]) * 60 + parseInt(startMinPlayer2[0]); 
+let additionTime = 5;
 
 function updateCountDown() {
   if(active === 1){
@@ -41,15 +45,14 @@ function updateCountDown() {
   }
 }
 
-if(active === 0){ 
+if(active === 0 || active == 1){ 
   player1.addEventListener("click",()=>{
     active = 2; 
     player1.style.cursor = "default"; 
     player1.tabIndex = "-1"; 
-
     clearInterval(intervalId);
     
-    updateCountDown()
+    updateCountDown() 
     intervalId = setInterval(updateCountDown, 1000);
     player2.style.backgroundColor = "#00aaef"; 
     player2.style.cursor = "pointer";      
@@ -60,9 +63,9 @@ if(active === 0){
   })
 }
 
-if(active === 0){
+if(active === 0 || active === 2){
   player2.addEventListener("click",()=>{
-    active = 1;  
+    active = 1;   
     player2.style.cursor = "default";     
     player2.tabIndex = "-1";  
 
@@ -102,4 +105,45 @@ restartBtn.addEventListener("click",()=>{
   player2.style.cursor = "pointer";      
 
   active = 0;
+})
+
+settingBtn.addEventListener("click",()=>{
+  clearInterval(intervalId); 
+  if(active === 1) { 
+    player1.style.backgroundColor ="#006699";   
+  }
+  if(active === 2) {  
+    player2.style.backgroundColor ="#006699";     
+  }  
+  settingModal.showModal();
+})
+cancelBtn.addEventListener("click",()=>{
+  settingModal.close();  
+})
+
+acceptBtn.addEventListener("click",()=>{
+  let timeSelected = document.getElementById('timeSelect');
+  let addTimeSelect = document.getElementById('add-timeSelect');
+  let timeSelect = timeSelected.options[timeSelected.selectedIndex].value;
+  additionTime = addTimeSelect.options[addTimeSelect.selectedIndex].value;
+  if(timeSelect == 10) { 
+    startMinPlayer1 = ["00","10"];
+    startMinPlayer2 = ["00","10"];
+  } else if(timeSelect == 5){
+    startMinPlayer1 = ["00","5"];  
+    startMinPlayer2 = ["00","5"];
+  }
+
+  player1.innerHTML = startMinPlayer1[1] + ":" + startMinPlayer1[0]; 
+  player2.innerHTML = startMinPlayer2[1] + ":" + startMinPlayer2 [0];  
+  time1 = parseInt(startMinPlayer1[1]) * 60 + parseInt(startMinPlayer1[0]);
+  time2 = parseInt(startMinPlayer2[1]) * 60 + parseInt(startMinPlayer2[0]); 
+  clearInterval(intervalId);
+  active = 0;
+
+  player1.style.backgroundColor = "#444";
+  player1.style.cursor = "pointer"; 
+  player2.style.backgroundColor = "#444";
+  player2.style.cursor = "pointer"; 
+  settingModal.close();  
 })

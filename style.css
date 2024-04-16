@@ -30,7 +30,7 @@
   margin: 5px;  
 }
 .function-btn {  
-  background-color: #222; 
+  background-color: inherit;  
   flex-grow: 1;
   border: none; 
   transition: background-color .1s;
@@ -59,10 +59,62 @@ img {
 }
 button {
   cursor: pointer; 
+} 
+dialog {
+  font-size: 50px; 
+  position: fixed;
+  margin: auto; 
+  width: 400px;
+  height: 200px;
+  background-color: #666;   
+}
+.modal-container {
+  padding: 10px; 
+}
+
+.functions-container{
+  width: 300px;
+  height: 150px;  
+  padding: 10px; 
+}
+dialog > div > div > div { 
+  background-color: #222;
+  margin: 10px; 
+  padding: 5px; 
+  display: flex;
+}
+label {
+  flex: 1; 
+  color: #ccc;     
+  font-size: 30px; 
+  margin: 0 5px 0 0;
+}
+select {
+  flex: 2; 
+  background-color: #222;
+  border: none;
+  font-size: 20px;  
+  color: white; 
+  text-align: center; 
+  text-align-last: center; 
+} 
+dialog > div > button { 
+  background-color: inherit;  
+  border: none;
+}
+.cancel {
+  position: absolute;
+  right: 0px;   
+  top: 0px;      
+}
+.accept {
+  position: absolute; 
+  right: 20px;   
+  bottom: 10px;      
 }
 @media screen and (width < 795px) {
   .container {
-    flex-direction: column; 
+    flex-direction: column;  
   } 
   .bar {
     flex-direction: row; 

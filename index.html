@@ -17,6 +17,33 @@
       <button class="function-btn pause-start-btn" tabindex="-1"><img class="pause-start-btn-img" src="resources/icon-pause.png" alt=""></button>
       <button class="function-btn restart-btn" tabindex="-1"><img class="restart-btn-img" src="resources/icon-restart.png" alt=""></button>
       <button class="function-btn setting-btn" tabindex="-1"><img class="setting-btn-img" src="resources/icon-setting.png" alt=""></button>
+      <dialog id="settings-dialog">
+        <div class="modal-container">
+          <div class="functions-container">
+
+            <div class="time">
+              <label for="timeSelect">Time</label>
+              <select id="timeSelect">  
+                <option value="10">10 min</option> 
+                <option value="5">5 min</option>
+              </select>
+            </div>
+            <div class="added-time">
+              <label for="add-timeSelect">Increment</label>
+              <select id="add-timeSelect">  
+                <option value="10">0</option> 
+                <option value="5">1</option>
+                <option value="5">2</option>
+                <option value="5">3</option>
+                <option value="5">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
+          <button class="cancel"><img src="resources/icon-cancel.png" alt="cancel icon"></button>
+          <button class="accept"><img src="resources/icon-check.png" alt="accept icon"></button> 
+        </div>  
+      </dialog>
     </div>
     <button class="player" id="player2">10:00</button>    
   </div>
